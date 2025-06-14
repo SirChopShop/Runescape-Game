@@ -6,7 +6,7 @@
     <title>RuneScape Classic - Complete</title>
     <style>
 
-/* Mobile landscape optimizations */
+/* Mobile landscape optimizations - everything must fit */
 @media screen and (max-width: 926px) and (orientation: landscape) {
     body {
         overflow: hidden;
@@ -19,116 +19,151 @@
         display: flex;
         flex-direction: row;
         height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Left panel - very compact */
+    .left-panel {
+        width: 160px;
+        min-width: 160px;
+        max-width: 160px;
+        height: 100vh;
+        overflow-y: auto;
+        font-size: 9px;
+        margin: 0;
+        padding: 4px;
+    }
+    
+    /* Main game area - calculated to fit */
+    .main-game {
+        width: calc(100vw - 320px); /* Total width minus both panels */
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
         overflow: hidden;
     }
     
-    /* Left panel - narrower for mobile */
-    .left-panel {
-        width: 180px;
-        min-width: 160px;
-        max-width: 200px;
-        height: 100vh;
-        overflow-y: auto;
-        font-size: 11px;
-    }
-    
-    /* Main game area */
-    .main-game {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-width: 300px;
-        height: 100vh;
-    }
-    
     .game-world {
-        flex: 1;
-        min-height: 0;
+        height: calc(100vh - 80px); /* Full height minus chat */
+        overflow: hidden;
+        margin: 2px;
+        padding: 5px;
     }
     
     .chat-box {
-        height: 100px;
-        font-size: 11px;
+        height: 75px;
+        margin: 2px;
+        padding: 4px;
+        font-size: 10px;
+        overflow-y: auto;
     }
     
-    /* Right panel - narrower for mobile */
+    /* Right panel - compact */
     .right-panel {
-        width: 200px;
-        min-width: 180px;
-        max-width: 220px;
+        width: 160px;
+        min-width: 160px;
+        max-width: 160px;
         height: 100vh;
         overflow-y: auto;
-        font-size: 11px;
+        font-size: 9px;
+        margin: 0;
+        padding: 4px;
     }
     
-    /* Make tiles touch-friendly but not huge */
+    /* World tiles - smaller to fit more */
     .tile {
-        min-width: 35px;
-        min-height: 35px;
-        font-size: 20px;
-        margin: 1px;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        margin: 0px;
+        line-height: 26px;
     }
     
-    /* Touch-friendly buttons */
+    /* Compact buttons */
     .action-btn {
-        padding: 6px 10px;
-        font-size: 12px;
-        min-height: 36px;
+        padding: 4px 8px;
+        font-size: 10px;
+        min-height: 32px;
         margin: 1px;
     }
     
-    /* Inventory and equipment touch-friendly */
+    /* Smaller inventory/equipment */
     .inventory-slot, .equipment-slot {
-        width: 42px;
-        height: 42px;
-        font-size: 22px;
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
     }
     
-    /* Smaller text for mobile */
+    .inventory-grid {
+        gap: 1px;
+    }
+    
+    .equipment-grid {
+        gap: 1px;
+    }
+    
+    /* Very compact text */
     .skill-row, .chat-message {
-        font-size: 10px;
-        line-height: 1.2;
+        font-size: 9px;
+        line-height: 1.1;
+        margin: 1px 0;
     }
     
     h3 {
-        font-size: 11px;
-        margin-bottom: 4px;
+        font-size: 10px;
+        margin-bottom: 3px;
+        padding-bottom: 1px;
     }
     
     .stat-bar {
-        height: 14px;
+        height: 12px;
+        margin: 1px 0;
     }
     
     .stat-text {
-        font-size: 9px;
+        font-size: 8px;
     }
     
-    /* Compact containers */
+    /* Ultra-compact containers */
     .stats-container, .inventory-container, 
-    .equipment-container, .combat-container {
-        margin-bottom: 8px;
-        padding: 6px;
+    .equipment-container, .combat-container,
+    .shop-container, .bank-container {
+        margin-bottom: 5px;
+        padding: 3px;
+    }
+    
+    .skill-level {
+        min-width: 15px;
+    }
+    
+    .skill-name {
+        min-width: 45px;
+    }
+    
+    /* Force everything to stay in bounds */
+    * {
+        box-sizing: border-box;
     }
 }
 
-/* Portrait mobile - simplified single column */
+/* Portrait mobile - hide panels to fit */
 @media screen and (max-width: 768px) and (orientation: portrait) {
-    .game-container {
-        flex-direction: column;
-        height: 100vh;
-    }
-    
     .left-panel, .right-panel {
-        display: none; /* Hide side panels in portrait */
+        display: none;
     }
     
     .main-game {
-        flex: 1;
+        width: 100vw;
         height: 100vh;
     }
 }
 
-/* Touch improvements for all mobile */
+/* Touch improvements */
 @media screen and (max-width: 926px) {
     .tile, .action-btn, .inventory-slot, .equipment-slot {
         -webkit-tap-highlight-color: rgba(0,0,0,0.1);
