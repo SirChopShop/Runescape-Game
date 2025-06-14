@@ -8,71 +8,94 @@
 
 /* Mobile optimizations */
 @media screen and (max-width: 768px) {
+    body {
+        overflow: hidden;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+    }
+    
     .game-container {
         flex-direction: column;
         height: 100vh;
+        overflow: hidden;
     }
     
-    .left-panel, .right-panel {
-        width: 100%;
-        height: auto;
-        max-height: 200px;
-        overflow-y: auto;
-        order: 2;
-    }
-    
+    /* Game world takes most of the screen */
     .main-game {
         order: 1;
         flex: 1;
-        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
     }
     
+    .game-world {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+    
+    /* Chat box smaller on mobile */
     .chat-box {
-        height: 80px;
+        height: 60px;
+        order: 2;
+        overflow-y: auto;
     }
     
-    /* Make tiles touch-friendly */
+    /* Side panels become horizontal scrollable bars */
+    .left-panel, .right-panel {
+        width: 100%;
+        height: 120px;
+        max-height: 120px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        order: 3;
+        display: flex;
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    .left-panel > div, .right-panel > div {
+        flex-shrink: 0;
+        min-width: 200px;
+    }
+    
+    /* Make tiles bigger and more touch-friendly */
     .tile {
-        min-width: 35px;
-        min-height: 35px;
-        font-size: 20px;
-    }
-    
-    /* Better button sizes for touch */
-    .action-btn {
-        padding: 8px 12px;
-        font-size: 14px;
-        min-height: 44px;
-    }
-    
-    /* Improve inventory for touch */
-    .inventory-slot, .equipment-slot {
-        width: 45px;
-        height: 45px;
+        min-width: 40px;
+        min-height: 40px;
         font-size: 24px;
+        margin: 1px;
     }
     
-    /* Stack panels for mobile */
-    .stats-container, .inventory-container, 
-    .equipment-container, .combat-container {
-        margin-bottom: 10px;
+    /* Better touch targets */
+    .action-btn {
+        padding: 10px 15px;
+        font-size: 16px;
+        min-height: 44px;
+        margin: 2px;
     }
     
-    /* Make text more readable */
+    .inventory-slot, .equipment-slot {
+        width: 50px;
+        height: 50px;
+        font-size: 28px;
+    }
+    
+    /* Hide some less critical info on mobile */
+    .stats-container .stat-bar {
+        height: 12px;
+    }
+    
     .skill-row, .chat-message {
-        font-size: 13px;
+        font-size: 12px;
     }
-}
-
-/* Touch improvements */
-.tile, .action-btn, .inventory-slot, .equipment-slot {
-    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
-    cursor: pointer;
-}
-
-/* Prevent zoom on input focus */
-input, select, textarea {
-    font-size: 16px;
+    
+    h3 {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
 }
         * {
             margin: 0;
